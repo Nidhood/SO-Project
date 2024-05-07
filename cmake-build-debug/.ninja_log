@@ -1,0 +1,8 @@
+# ninja log v5
+3	657	1715057618715465036	CMakeFiles/sensor.dir/src/phSensor.cpp.o	2780f9cfcc9b6fcb
+657	898	1715057618979463956	sensor	16021d16471254a9
+2	599	1715057388804404500	CMakeFiles/sensor.dir/src/sensor.cpp.o	bc9c1f0fa92a3f18
+3	1526	1715056054897846701	CMakeFiles/sensor.dir/main.cpp.o	ad076f10574601d1
+19	54	1715118803025468227	build.ninja	ed2dc31f9a1879b5
+3	2649	1715050568002804010	CMakeFiles/sensor.dir/src/stringValidations.cpp.o	f638b687f056a21e
+3	630	1715057618711465052	CMakeFiles/sensor.dir/src/temperatureSensor.cpp.o	710db38499491680
