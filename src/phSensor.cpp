@@ -9,6 +9,11 @@ void PhSensor::generateData() {
 
     // ph entre 0 y 14 (con un solo decimal):
     this->phData = dis(gen);
+    
+    // Comprobar si el pH está fuera del rango permitido y alertar:
+    if (this->phData < 6.0 || this->phData > 8.0) {
+        std::cerr << "Alerta: pH fuera de rango - " << std::fixed << std::setprecision(1) << this->phData << std::endl;
+    }
 
     // Imprimir el ph en la consola (con un solo decimal):
     std::cout << std::setprecision(1) << std::fixed << "ph: " << this->phData << std::endl;
