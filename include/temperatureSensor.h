@@ -6,9 +6,11 @@
 class TemperatureSensor : public Sensor {
     int temperatureData{};
 public:
-    TemperatureSensor(std::string sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : Sensor(std::move(sensorType), fileName, pipeName, handlerTime) {};
+    TemperatureSensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : Sensor(sensorType, fileName, pipeName, handlerTime) {};
     void generateData() override;
+    void writeFifo() override;
     void sendData() override;
-    [[noreturn]]  void run() override;
+    [[noreturn]] void run() override;
 };
+
 #endif

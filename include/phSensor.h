@@ -5,11 +5,13 @@
 #include "sensor.h"
 
 class PhSensor : public Sensor {
-    int phData{};
+    double phData{};
 public:
-    PhSensor(std::string sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : Sensor(std::move(sensorType), fileName, pipeName, handlerTime) {};
+    PhSensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : Sensor(sensorType, fileName, pipeName, handlerTime) {};
     void generateData() override;
+    void writeFifo() override;
     void sendData() override;
+
     [[noreturn]] void run() override;
 };
 

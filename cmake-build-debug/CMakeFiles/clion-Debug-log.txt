@@ -1,16 +1,16 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/x64/ninja -G Ninja -S /Users/nidhood/Downloads/PROJECT_SM -B /Users/nidhood/Downloads/PROJECT_SM/cmake-build-debug
--- The C compiler identification is AppleClang 15.0.0.15000309
--- The CXX compiler identification is AppleClang 15.0.0.15000309
+/home/nidhood/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/nidhood/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -S /home/nidhood/Documents/SO-Project -B /home/nidhood/Documents/SO-Project/cmake-build-debug
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Check for working C compiler: /usr/bin/cc - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (2.0s)
+-- Configuring done (0.5s)
 -- Generating done (0.0s)
--- Build files have been written to: /Users/nidhood/Downloads/PROJECT_SM/cmake-build-debug
+-- Build files have been written to: /home/nidhood/Documents/SO-Project/cmake-build-debug

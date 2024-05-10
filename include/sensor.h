@@ -8,23 +8,25 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <iomanip>
 
 class Sensor {
-    std::string sensorType;
+    // 0 = temperatura, 1 = ph
     std::string pipeName;
-    int fifo_fd{};
     int data{};
     mode_t mode{};
 
 protected:
     int handlerTime{};
     std::string fileName;
+    uint8_t sensorType{};
+    int fifo_fd{};
 public:
     Sensor() = default;
-    Sensor(std::string sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : sensorType(std::move(sensorType)), fileName(std::move("../files/" + fileName)) , pipeName(std::move("/tmp/" + pipeName)), handlerTime(handlerTime), mode(0666) {};
+    Sensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : sensorType(sensorType), fileName(std::move("../files/" + fileName)) , pipeName(std::move("/tmp/" + pipeName)), handlerTime(handlerTime), mode(0666) {};
     void createFifo();
     void openFifo();
-    void writeFifo();
+    virtual void writeFifo();
     void closeFifo() const;
     virtual void generateData();
     virtual void sendData();

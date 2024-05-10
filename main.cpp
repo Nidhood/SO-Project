@@ -3,10 +3,13 @@
 #include "temperatureSensor.h"
 #include "phSensor.h"
 
+#define TEMPERATURE_OPTION "1"
+#define PH_OPTION "2"
+
 int main( int argc, char* argv[] ) {
 
     // Declaramos variables para almacenar los argumentos recibidos:
-    std::string sensorType;
+    uint8_t sensorType;        // 1 = temperatura, 2 = ph
     std::string fileName;
     std::string pipeName;
     int handlerTime = 0;
@@ -20,7 +23,7 @@ int main( int argc, char* argv[] ) {
         // Mostrar el uso correcto del programa:
         std::cout << "Uso: ./sensor -s tipo-sensor -t tiempo -f archivo -p pipe-nominal\n"
                "Donde:\n"
-               "tipo-sensor: puede ser 'temperatura' o 'ph'.\n"
+               "tipo-sensor: puede ser '0 = temperatura' o '1 = ph'.\n"
                "tiempo: tiempo en segundos entre cada lectura.\n"
                "archivo: nombre del archivo con las medidas de temperatura o ph.\n"
                "pipe-nominal: nombre del pipe nominal.\n" << std::endl;
@@ -70,20 +73,20 @@ int main( int argc, char* argv[] ) {
             exit(1);
         }
 
-        // 3. El tipo de sensor debe ser "temperatura" o "ph".
-        if (equal_strings(argv[1], "-s") && ((!equal_strings(argv[2], "temperatura") && !equal_strings(argv[2], "ph")))) {
+        // 3. El tipo de sensor debe ser "1=temperatura" o "2=ph".
+        if (equal_strings(argv[1], "-s") && ((!equal_strings(argv[2], TEMPERATURE_OPTION) && !equal_strings(argv[2], PH_OPTION)))) {
             perror("Error en '-s': el tipo de sensor no es válido");
             exit(1);
         } else if (equal_strings(argv[3], "-s") &&
-                  (!equal_strings(argv[4], "temperatura") && !equal_strings(argv[4], "ph"))) {
+                  (!equal_strings(argv[4], TEMPERATURE_OPTION) && !equal_strings(argv[4], PH_OPTION))) {
             perror("Error en '-s': el tipo de sensor no es válido");
             exit(1);
         } else if (equal_strings(argv[5], "-s") &&
-                  (!equal_strings(argv[6], "temperatura") && !equal_strings(argv[6], "ph"))) {
+                  (!equal_strings(argv[6], TEMPERATURE_OPTION) && !equal_strings(argv[6], PH_OPTION))) {
             perror("Error en '-s': el tipo de sensor no es válido");
             exit(1);
         } else if (equal_strings(argv[7], "-s") &&
-                   (!equal_strings(argv[8], "temperatura") && !equal_strings(argv[8], "ph"))) {
+                   (!equal_strings(argv[8], TEMPERATURE_OPTION) && !equal_strings(argv[8], PH_OPTION))) {
             perror("Error en '-s': el tipo de sensor no es válido");
             exit(1);
         }
@@ -137,11 +140,11 @@ int main( int argc, char* argv[] ) {
     // Obtener los argumentos recibidos:
 
     //1. Tipo de sensor:
-    if (equal_strings(argv[2], "temperatura") || equal_strings(argv[4], "temperatura") ||
-        equal_strings(argv[6], "temperatura") || equal_strings(argv[8], "temperatura")) {
-        sensorType = "temperatura";
+    if (equal_strings(argv[2], TEMPERATURE_OPTION) || equal_strings(argv[4], TEMPERATURE_OPTION) ||
+        equal_strings(argv[6], TEMPERATURE_OPTION) || equal_strings(argv[8], TEMPERATURE_OPTION)) {
+        sensorType = '1';
     } else {
-        sensorType = "ph";
+        sensorType = '2';
     }
 
     //2. Tiempo entre cada lectura:
@@ -178,7 +181,7 @@ int main( int argc, char* argv[] ) {
     }
 
     // Crear un objeto de la clase Sensor con los argumentos recibidos:
-    if(sensorType == "temperatura"){
+    if(sensorType == '1'){
         sensor = new TemperatureSensor(sensorType, fileName, pipeName, handlerTime);
     } else {
         sensor = new PhSensor(sensorType, fileName, pipeName, handlerTime);

@@ -14,6 +14,34 @@ void TemperatureSensor::generateData() {
     std::cout << "Temperatura: " << temperatureData  << " °C"<< std::endl;
 }
 
+void TemperatureSensor::writeFifo() {
+
+    // Declaramos un arreglo de bytes de 4 bytes:
+    uint8_t data_frame[5];
+
+    // El primer byte es el tipo de sensor, 1 = temperatura, 2 = ph:
+    data_frame[0] = this->sensorType;
+
+    // El segundo byte es el signo de la temperatura, 0 = positivo, 1 = negativo:
+    data_frame[1] = this->temperatureData < 0 ? 1 : 0;
+
+    // Los tres últimos bytes son los valores máximos de la temperatura (-273 °C a 999 °C):
+    int integerPart = std::abs(this->temperatureData); // Valor absoluto de la temperatura
+    data_frame[2] = integerPart / 100;
+    data_frame[3] = (integerPart % 100) / 10;
+    data_frame[4] = integerPart % 10;
+
+    // Escribimos la trama de datos en el FIFO:
+    try{
+        if (write(this->fifo_fd, data_frame, sizeof(data_frame)) == -1) {
+            throw std::runtime_error("Error al escribir en el FIFO");
+        }
+    } catch (const std::runtime_error& e){
+        std::cerr << e.what() << std::endl;
+        exit(1);
+    }
+}
+
 void TemperatureSensor::sendData() {
     // Abrir el FIFO en modo escritura:
     openFifo();
@@ -54,5 +82,5 @@ void TemperatureSensor::sendData() {
     }
 
     // Cerrar el archivo de configuración:
-    file.close();
+    // file.close();
 }
