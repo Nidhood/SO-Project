@@ -5,14 +5,33 @@ void TemperatureSensor::generateData() {
     // Creamos un generador de números aleatorios con la librería estándar de C++11:
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(-10, 30);
+    std::uniform_int_distribution<> dis(32, 212);
+    std::uniform_real_distribution<> prob(0, 1); // Distribución para probabilidad
 
     // Temperatura entre -10 °C y 30 °C:
-    temperatureData = dis(gen);
+    this->temperatureData = dis(gen);
 
-    // Imprimir la temperatura en la consola:
-    std::cout << "Temperatura: " << temperatureData  << " °C"<< std::endl;
+    // Determinar si se produce un error (20% de probabilidad)
+    if (prob(gen) <= 0.2) {
+        this->temperatureData = -dis(gen); // Número negativo
+    }
+
+    // Si se muestran valores negativos, se marca como error:
+    if (this->temperatureData < 0) {
+        std::cerr << "[Error]\t\tTemperatura negativa:\t\t" << this->temperatureData << " °F" << std::endl;
+    }
+
+    // Comprobar si la temperatura está fuera del rango permitido y alertar (68 F° a 89 °F):
+    else if (this->temperatureData < 68 || this->temperatureData > 89) {
+        std::cerr << "[Alerta]\tTemperatura fuera de rango:\t" << this->temperatureData << " °F" << std::endl;
+    }
+
+    // Si se muestran valores positivos, se marca como correcto:
+    else {
+        std::cout << "[Correcto]\tTemperatura dentro del rango:\t" << this->temperatureData << " °F" << std::endl;
+    }
 }
+
 
 void TemperatureSensor::writeFifo() {
 

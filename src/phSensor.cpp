@@ -6,18 +6,32 @@ void PhSensor::generateData() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 14.0);
+    std::uniform_real_distribution<> prob(0.0, 1.0); // Distribución para probabilidad
 
-    // ph entre 0 y 14 (con un solo decimal):
+    // pH entre 0 y 14 (con un solo decimal):
     this->phData = dis(gen);
-    
-    // Comprobar si el pH está fuera del rango permitido y alertar:
-    if (this->phData < 6.0 || this->phData > 8.0) {
-        std::cerr << "Alerta: pH fuera de rango - " << std::fixed << std::setprecision(1) << this->phData << std::endl;
+
+    // Determinar si se produce un error (20% de probabilidad)
+    if (prob(gen) <= 0.2) {
+        this->phData = -dis(gen); // pH negativo
     }
 
-    // Imprimir el ph en la consola (con un solo decimal):
-    std::cout << std::setprecision(1) << std::fixed << "ph: " << this->phData << std::endl;
+    // Si se muestran valores negativos, se marca como error:
+    if (this->phData < 0) {
+        std::cerr << "[Error]\t\tpH negativo:\t\t" << std::fixed << std::setprecision(1) << this->phData << std::endl;
+    }
+
+    // Comprobar si el pH está fuera del rango permitido y alertar:
+    else if (this->phData < 6.0 || this->phData > 8.0) {
+        std::cerr << "[Alerta]\tpH fuera de rango:\t" << std::fixed << std::setprecision(1) << this->phData << std::endl;
+    }
+
+    // Si se muestran valores positivos, se marca como correcto:
+    else {
+        std::cout << "[Correcto]\tpH dentro del rango:\t" << std::fixed << std::setprecision(1) << this->phData << std::endl;
+    }
 }
+
 
 // Método para escribir en el FIFO:
 void PhSensor::writeFifo() {
