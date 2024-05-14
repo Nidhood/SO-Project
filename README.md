@@ -42,7 +42,7 @@ El monitor recibe las mediciones de los sensores y las gestiona mediante tres hi
 1. **Clonar el Repositorio:**
    - Clone este repositorio a su máquina local utilizando el siguiente comando: 🖥️
      ```
-     git clone https://github.com/andres345gm/IA-project2.git
+     git clone https://github.com/Nidhood/SO-Project.git
      ```
 
 2. **Explorar el Repositorio:**
