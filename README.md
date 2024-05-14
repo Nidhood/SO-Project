@@ -78,7 +78,8 @@ El monitor recibe las mediciones de los sensores y las gestiona mediante tres hi
 
 ## Demostración del Funcionamiento 📸
 
-Encuentra fotos de ejemplo en la carpeta `photos` en la raíz del repositorio. Estas capturas muestran la ejecución del programa, incluyendo la interacción con los sensores y el procesamiento de las mediciones. Puedes acceder a las fotos [aquí](#).
+Encuentra fotos de ejemplo en la carpeta `photos` en la raíz del repositorio. Estas capturas muestran la ejecución del programa, incluyendo la interacción con los sensores y el procesamiento de las mediciones. Puedes acceder a las fotos [aquí](https://github.com/Nidhood/SO-Project/raw/main/photos).
 
 
-¡Ahora está listo para comenzar a trabajar en el proyecto! Si tiene alguna pregunta o necesita ayuda adicional, no dude en comunicarse con el profesor o con sus compañeros de equipo. ✨
+![](https://github.com/Nidhood/SO-Project/raw/main/photos/sensors_and_named_pipe_test.png)
+
