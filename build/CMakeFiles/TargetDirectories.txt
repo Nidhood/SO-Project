@@ -1,0 +1,4 @@
+/Users/s.a.u.1.ariasss/Desktop/SO-Project/build/CMakeFiles/sensor.dir
+/Users/s.a.u.1.ariasss/Desktop/SO-Project/build/CMakeFiles/test_recolector.dir
+/Users/s.a.u.1.ariasss/Desktop/SO-Project/build/CMakeFiles/edit_cache.dir
+/Users/s.a.u.1.ariasss/Desktop/SO-Project/build/CMakeFiles/rebuild_cache.dir
