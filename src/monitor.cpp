@@ -5,35 +5,6 @@
 #include <unistd.h>
 #include <ctime>
 #include <iomanip>
-#include <semaphore.h>
-#include <vector>
-#include <thread>
-
-class Monitor {
-private:
-    std::string temperatureFileName;
-    std::string phFileName;
-    std::string fifoName;
-    int bufferSize;
-    std::vector<int> temperatureBuffer;
-    std::vector<double> phBuffer;
-    std::thread recolectorThread;
-    std::thread phThread;
-    std::thread temperatureThread;
-    sem_t *temperatureSemaphore;
-    sem_t *phSemaphore;
-    sem_t *temperatureBufferSemaphore;
-    sem_t *phBufferSemaphore;
-
-public:
-    Monitor(const std::string& temperatureFile, const std::string& phFile, const std::string& fifo, int bufferSize);
-    ~Monitor();
-    void run();
-    void join();
-    void recolectorFunction();
-    void phFunction();
-    void temperatureFunction();
-};
 
 Monitor::Monitor(const std::string& temperatureFile, const std::string& phFile, const std::string& fifo, int bufferSize)
     : temperatureFileName(temperatureFile), phFileName(phFile), fifoName(fifo), bufferSize(bufferSize) {
@@ -127,7 +98,7 @@ void Monitor::phFunction() {
         auto now = std::time(nullptr);
         auto tm = *std::localtime(&now);
         phFile << std::put_time(&tm, "%Y-%m-%d %H:%M:%S") << " - pH: " << ph << std::endl;
-        if (ph < 6.0 || ph > 8.0) {
+        if (ph < 6.0 or ph > 8.0) {
             std::cout << "Alerta: pH fuera de rango - " << ph << std::endl;
         }
     }
@@ -153,7 +124,7 @@ void Monitor::temperatureFunction() {
         auto now = std::time(nullptr);
         auto tm = *std::localtime(&now);
         temperatureFile << std::put_time(&tm, "%Y-%m-%d %H:%M:%S") << " - Temperatura: " << temperature << " °C" << std::endl;
-        if (temperature < 68 || temperature > 89) {
+        if (temperature < 68 or temperature > 89) {
             std::cout << "Alerta: Temperatura fuera de rango - " << temperature << " °C" << std::endl;
         }
     }

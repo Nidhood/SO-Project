@@ -10,10 +10,10 @@ class Monitor {
 private:
     std::vector<int> temperatureBuffer;
     std::vector<double> phBuffer;
-    sem_t temperatureSemaphore;
-    sem_t phSemaphore;
-    sem_t temperatureBufferSemaphore;
-    sem_t phBufferSemaphore;
+    sem_t *temperatureSemaphore;
+    sem_t *phSemaphore;
+    sem_t *temperatureBufferSemaphore;
+    sem_t *phBufferSemaphore;
     std::string temperatureFileName;
     std::string phFileName;
     std::string fifoName;
@@ -35,4 +35,4 @@ private:
     void temperatureFunction();
 };
 
-#endif
+#endif // MONITOR_H
