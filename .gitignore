@@ -1,3 +1,8 @@
 /.idea
 /cmake-build-debug
 /.vscode
+monitor
+pruebap.txt
+pruebat.txt
+sensor
+test_sensor_receive_data

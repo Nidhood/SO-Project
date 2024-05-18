@@ -1,0 +1,5 @@
+./monitor -b 5 -t pruebat.txt -h pruebap.txt -p mipipo
+
+./sensor -s 2 -t 1 -f ph.txt -p mipipo
+
+./sensor -s 1 -t 1 -f temperatura.txt p mipipo

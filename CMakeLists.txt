@@ -13,6 +13,12 @@ add_executable(sensor
         src/stringValidations.cpp
 )
 
+add_executable(monitor
+        src/stringValidations.cpp
+        app/monitor_run.cpp
+        src/monitor.cpp
+)
+
 add_executable(test_sensor_receive_data
        app/main_process.cpp
 )
