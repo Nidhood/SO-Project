@@ -88,6 +88,12 @@ void PhSensor::sendData() {
     // Abrir el archivo de configuración (sobreescribir):
     std::ofstream file(this->fileName, std::ios::trunc);
 
+    // Comprobar si el archivo se abrió correctamente:
+    if (!file) {
+        std::cerr << "Error al abrir el archivo: '" << this->fileName << "'." << std::endl;
+        exit(1);
+    }
+
     // Generar y enviar datos de ph cada cierto intervalo:
     while(true) {
 

@@ -3,7 +3,8 @@
 # Borramos los archivos anteriores
 rm -rf cmake-build-debug
 rm -f sensor
-rm -f test_sensor_receive_data
+# rm -f test_sensor_receive_data
+rm -f monitor
 
 # Compilamos el proyecto
 mkdir -p cmake-build-debug

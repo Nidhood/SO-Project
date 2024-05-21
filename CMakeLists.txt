@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.22)
 project(PROJECT_SM)
 
 set(CMAKE_CXX_STANDARD 17)
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
 
 add_executable(sensor
@@ -19,14 +18,8 @@ add_executable(monitor
         src/monitor.cpp
 )
 
-add_executable(test_sensor_receive_data
-       app/main_process.cpp
-)
-
-# add_executable(monitor
-#         app/monitor_run.cpp
-#         src/monitor.cpp
-#         src/... .cpp -> Añadir los archivos que se necesiten !!!
+# add_executable(test_sensor_receive_data
+#      app/main_process.cpp
 # )
 
 include_directories(include)    # Headers       (.h)

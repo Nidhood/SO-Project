@@ -7,15 +7,17 @@
 #include <thread>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <fcntl.h>
 #include <unistd.h>
 #include <semaphore.h>
 #include <ctime>
 #include <pthread.h>
 #include <vector>
-
+#include <iomanip>
+#include <cmath>
+#include <cstdint>
 
 class Monitor {
     std::vector<std::thread> silos;
@@ -35,12 +37,12 @@ class Monitor {
 
     public:
     Monitor(int tam_buffer);
-    void run(std::string file_temp, std::string file_ph, std::string pipe_nominal);
+    void run(const std::string& file_temp, const std::string& file_ph, const std::string& pipe_nominal);
 
     private:
     void recolector(std::string pipe_nominal); 
-    void tempetarutaThread(std::string arch);
-    void phThread(std::string arch);
+    void temperaturaThread(const std::string& arch);
+    void phThread(const std::string& arch);
     std::string obtenerHoraActual();
 };
 

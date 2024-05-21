@@ -23,7 +23,7 @@ protected:
     int fifo_fd{};
 public:
     Sensor() = default;
-    Sensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : sensorType(sensorType), fileName(std::move("../files/" + fileName)) , pipeName(std::move("/tmp/" + pipeName)), handlerTime(handlerTime), mode(0666) {};
+    Sensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : sensorType(sensorType), fileName(std::move("files/" + fileName)) , pipeName(std::move("/tmp/" + pipeName)), handlerTime(handlerTime), mode(0666) {};
     void createFifo();
     void openFifo();
     virtual void writeFifo();

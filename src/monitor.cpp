@@ -17,11 +17,11 @@
     tamBuff = tam_buffer;
  }
  
-void Monitor::run(std::string file_temp, std::string file_ph, std::string pipe_nominal)
+void Monitor::run(const std::string& file_temp, const std::string& file_ph, const std::string& pipe_nominal)
 {
     silos.emplace_back([this, pipe_nominal]() { recolector(pipe_nominal); });
-    silos.emplace_back([this, file_ph]() { phThread(file_ph); });
-    silos.emplace_back([this, file_temp]() { tempetarutaThread(file_temp); });
+    silos.emplace_back([this, file_ph]() { phThread("files/" + file_ph); });
+    silos.emplace_back([this, file_temp]() { temperaturaThread("files/" + file_temp); });
 
     for(int i = 0; i < 3; i++)
     {
@@ -38,11 +38,11 @@ void Monitor::recolector(std::string pipe_nominal)
 
   std::cout << "Entro a MONITOR" << std::endl;
   std::string path = "/tmp/"+pipe_nominal;
-  const char* pipe = path.c_str(); 
-  
+  int temperatureData = 0;
+  double phData = 0.0;
+  const char* pipe = path.c_str();
   int fd, nbytes,  pid;
-   
-  char n[5];
+  uint8_t n[5];
    
   fd = open(pipe, O_RDONLY);
   if (fd == -1) {
@@ -56,16 +56,16 @@ void Monitor::recolector(std::string pipe_nominal)
    nbytes = read (fd, &n, sizeof(n));
    do{
     if(n[0] == '1'){
-      bool negativo = n[1] == 1;
-      if(negativo)
+      temperatureData = n[2] * 100 + n[3] * 10 + n[4];
+      if(n[1] == 1)
       {
-        std::cout << "lei un valor negativo" << std::endl;
+        temperatureData *= -1;
+        std::cerr << "[Error]\t\tTemperatura negativa:\t\t" << temperatureData << " °F" << "\t\t" << obtenerHoraActual() << std::endl;
       }
       else{
-        int temperature = (n[2] - '0') * 100 + (n[3] - '0') * 10 + (n[4] - '0');
         sem_wait(&semEmptyT);
         pthread_mutex_lock(&buffermutexT);
-        buffTp[frontT] = temperature;
+        buffTp[frontT] = temperatureData;
         if(finalT == tamBuff - 1)
         {
           finalT = 0;
@@ -77,16 +77,17 @@ void Monitor::recolector(std::string pipe_nominal)
         sem_post(&semFullT);
       }
     }else if(n[0] == '2'){
-      bool negativo = n[1] == 1;
-      if(negativo)
+      phData = std::ceil((n[2] * 10 + n[3] + (float)n[4] / 10) * 10) / 10;
+      if(n[1] == 1)
       {
-        std::cout << "lei un valor negativo" << std::endl;
+       phData *= -1;
+       std::cerr << "[Error]\t\tpH negativo:\t\t\t" << std::fixed << std::setprecision(1) << phData << "\t\t" << obtenerHoraActual() << std::endl;
       }
       else{
-        double ph = (n[2] - '0') * 10 + (n[3] - '0') + (n[4] - '0') / 10.0;
+
         sem_wait(&semEmptyP);
         pthread_mutex_lock(&buffermutex);
-        buffPh[frontP] = ph;
+        buffPh[frontP] = phData;
         if(finalP == tamBuff - 1)
         {
           finalP = 0;
@@ -100,8 +101,14 @@ void Monitor::recolector(std::string pipe_nominal)
     }
     nbytes = read (fd, &n, sizeof(n));
    } while(nbytes > 0);
-   std::cout << "esperando..." << std::endl;
-   sleep(10);
+   std::cout << "Esperando";
+   std::cout.flush();
+   for (int i = 1; i <= 10; ++i) {
+       sleep(1);
+       std::cout << "..." << i;
+       std::cout.flush();
+   }
+   std::cout << std::endl;
    std::cout << "Saliendo..." << std::endl;
    pthread_mutex_lock(&buffermutex);
    buffPh[frontP] = -1;
@@ -117,7 +124,6 @@ void Monitor::recolector(std::string pipe_nominal)
      return;
   }
    
-   
   close(fd);
   
   if (unlink(pipe) == -1){
@@ -128,12 +134,12 @@ void Monitor::recolector(std::string pipe_nominal)
   return;
 }
 
-void Monitor::tempetarutaThread(std::string arch)
+void Monitor::temperaturaThread(const std::string& arch)
 {
-  std::ofstream salida(arch);
+  std::ofstream salida(arch, std::ios::trunc);
   if(!salida)
   {
-    std::cerr << "Error al abrir el archivo:" << arch << std::endl;
+    std::cerr << "Error al abrir el archivo: '" << arch << "'." << std::endl;
     exit(1);
   }
   while(1)
@@ -149,9 +155,9 @@ void Monitor::tempetarutaThread(std::string arch)
     //cout << "Recibi una Temperatura: " << buffTp[frontT] << endl;
     if(buffTp[frontT] < 20 || buffTp[frontT] > 31.6)
     {
-      std::cout << "Temperatura fuera del rango" << std::endl;
+        std::cerr << "[Alerta]\tTemperatura fuera de rango:\t" << buffTp[frontT] << " °F" << "\t\t" << obtenerHoraActual() << std::endl;
     }
-    salida << buffTp[frontT] << " " << obtenerHoraActual() << std::endl;
+    salida << buffTp[frontT] << std::endl;
     if(frontT == tamBuff - 1)
     {
       frontT = 0;
@@ -164,15 +170,15 @@ void Monitor::tempetarutaThread(std::string arch)
   }
 }
 
-void Monitor::phThread(std::string arch)
+void Monitor::phThread(const std::string& arch)
 {
-  std::ofstream salida(arch);
-  if(!salida)
+  std::ofstream salida(arch, std::ios::trunc);
+  if(!salida.is_open())
   {
-    std::cerr << "Error al abrir el archivo:" << arch << std::endl;
+    std::cerr << "Error al abrir el archivo: '" << arch << "'." << std::endl;
     exit(1);
   }
-  while(1)
+  while(true)
   {
     sem_wait(&semFullP);
     pthread_mutex_lock(&buffermutex);
@@ -185,9 +191,9 @@ void Monitor::phThread(std::string arch)
     //cout << "Recibi un Ph: " << buffPh[frontP] << endl;
     if(buffPh[frontP] < 6.0 || buffPh[frontP] > 8.0)
     {
-      std::cout << "Ph fuera del rango" << std::endl;
+        std::cerr << "[Alerta]\tPH fuera de rango:\t\t" << std::fixed << std::setprecision(1) << buffPh[frontP] << "\t\t" << obtenerHoraActual() << std::endl;
     }
-    salida << buffPh[frontP] << " " << obtenerHoraActual() << std::endl;
+    salida << buffPh[frontP] << std::endl;
     if(frontP == tamBuff - 1)
     {
       frontP = 0;

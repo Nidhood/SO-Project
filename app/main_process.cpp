@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     char time_buffer[9]; // Suficiente para almacenar "HH:MM:SS\0"
 
     // Iniciamos el proceso de lectura de los datos de los FIFOs:
-    while (1) {
+    while(1) {
 
         // Leer los datos de los FIFOs:
         read(fd_temperature, data_frame, sizeof(data_frame));
