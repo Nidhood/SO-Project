@@ -35,12 +35,12 @@ class Monitor {
     int finalT;
     int tamBuff;
 
-    public:
+public:
     Monitor(int tam_buffer);
     void run(const std::string& file_temp, const std::string& file_ph, const std::string& pipe_nominal);
 
-    private:
-    void recolector(std::string pipe_nominal); 
+private:
+    void recolector(std::string pipe_nominal);
     void temperaturaThread(const std::string& arch);
     void phThread(const std::string& arch);
     std::string obtenerHoraActual();

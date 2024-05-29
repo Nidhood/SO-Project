@@ -119,6 +119,21 @@ int main(int argc, char *argv[]) {
       perror("error p: nombre invalido del pipe nominal");
       exit(1);
     }
+
+      // 7. las banderas deben ser válidas:
+      if (!is_valid_flag("-b", argc, argv)) {
+          perror("Error: la bandera '-b' no es válida.\n");
+          exit(-1);
+      } else if (!is_valid_flag("-t", argc, argv)) {
+          perror("Error: la bandera '-t' no es válida.\n");
+          exit(-1);
+      } else if (!is_valid_flag("-h", argc, argv)) {
+          perror("Error: la bandera '-h' no es válida.\n");
+          exit(-1);
+      } else if (!is_valid_flag("-p", argc, argv)) {
+          perror("Error: la bandera '-p' no es válida.\n");
+          exit(-1);
+      }
   }
     // asignando tamaño buffer
     if (equal_strings(argv[1], "-b")) {
@@ -141,6 +156,9 @@ int main(int argc, char *argv[]) {
     } else if (equal_strings(argv[7], "-t")) {
       file_temp = argv[8];
     }
+    // Asegurando que el archivo tenga la extensión .txt
+    file_temp = ensure_txt_extension(file_temp);
+
     // asignando nombre archivo ph
     if (equal_strings(argv[1], "-h")) {
       file_ph = argv[2];
@@ -151,6 +169,10 @@ int main(int argc, char *argv[]) {
     } else if (equal_strings(argv[7], "-h")) {
       file_ph = argv[8];
     }
+
+    // Asegurando que el archivo tenga la extensión .txt
+    file_ph = ensure_txt_extension(file_ph);
+
     // asignando nombre del pipe nominal
     if (equal_strings(argv[1], "-p")) {
       pipe_nominal = argv[2];

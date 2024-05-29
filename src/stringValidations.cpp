@@ -22,14 +22,39 @@ bool equal_strings(const std::string &str1, const std::string &str2){
     return true;
 }
 
+bool is_valid_flag(const std::string &str, int argc, char* argv[]){
+
+    // Definimos una expresión regular para verificar si el nombre de la bandera es válida.
+    std::regex flag_regex("^-[a-zA-Z]$");
+
+    // Verificar que la bandera sea válida en las posiciones impares:
+    for(int i = 1; i < argc; i += 2){
+        if(equal_strings(argv[i], str)){
+            return std::regex_match(argv[i], flag_regex);
+        }
+    }
+    return false;
+}
+
 bool is_valid_file(const std::string &str){
 
-    // Definimos una expresión regular para verificar si el nombre del archivo es válido.
-    std::regex file_regex("^[a-zA-Z0-9_]+\\.txt$");
+    // Definimos una expresión regular para verificar si el nombre del archivo es válido, permitiendo opcionalmente la extensión .txt.
+    std::regex file_regex("^[a-zA-Z0-9_]+(\\.txt)?$");
 
     // Verificar si el nombre del archivo cumple con la expresión regular:
     return std::regex_match(str, file_regex);
 }
+
+// Función para asegurar que el archivo tenga la extensión .txt.
+std::string ensure_txt_extension(const std::string &str) {
+    // Verificar si el nombre del archivo ya tiene la extensión .txt.
+    if (str.size() >= 4 && str.substr(str.size() - 4) == ".txt") {
+        return str; // Si ya tiene la extensión .txt, devolver el nombre original.
+    } else {
+        return str + ".txt"; // Si no tiene la extensión .txt, agregarla y devolver el nuevo nombre.
+    }
+}
+
 
 bool is_valid_pipe(const std::string &str){
 
