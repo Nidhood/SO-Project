@@ -81,5 +81,5 @@ El monitor recibe las mediciones de los sensores y las gestiona mediante tres hi
 Encuentra fotos de ejemplo en la carpeta `photos` en la raíz del repositorio. Estas capturas muestran la ejecución del programa, incluyendo la interacción con los sensores y el procesamiento de las mediciones. Puedes acceder a las fotos [aquí](https://github.com/Nidhood/SO-Project/raw/main/photos).
 
 
-![](https://github.com/Nidhood/SO-Project/raw/main/photos/test_4.png)
+![](https://github.com/Nidhood/SO-Project/raw/main/photos/test_5.png)
 
