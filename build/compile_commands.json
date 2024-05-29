@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/sensor.dir/app/sensor_run.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/app/sensor_run.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/app/sensor_run.cpp",
+  "output": "CMakeFiles/sensor.dir/app/sensor_run.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/sensor.dir/src/sensor.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/src/sensor.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/src/sensor.cpp",
+  "output": "CMakeFiles/sensor.dir/src/sensor.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/sensor.dir/src/phSensor.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/src/phSensor.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/src/phSensor.cpp",
+  "output": "CMakeFiles/sensor.dir/src/phSensor.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/sensor.dir/src/temperatureSensor.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/src/temperatureSensor.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/src/temperatureSensor.cpp",
+  "output": "CMakeFiles/sensor.dir/src/temperatureSensor.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/sensor.dir/src/stringValidations.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/src/stringValidations.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/src/stringValidations.cpp",
+  "output": "CMakeFiles/sensor.dir/src/stringValidations.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/test_recolector.dir/app/main_recolector.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/app/main_recolector.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/app/main_recolector.cpp",
+  "output": "CMakeFiles/test_recolector.dir/app/main_recolector.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/test_recolector.dir/src/monitor.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/src/monitor.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/src/monitor.cpp",
+  "output": "CMakeFiles/test_recolector.dir/src/monitor.cpp.o"
+},
+{
+  "directory": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/build",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/include -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/src -I/Users/s.a.u.1.ariasss/Desktop/SO-Project/app -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/test_recolector.dir/src/stringValidations.cpp.o -c /Users/s.a.u.1.ariasss/Desktop/SO-Project/src/stringValidations.cpp",
+  "file": "/Users/s.a.u.1.ariasss/Desktop/SO-Project/src/stringValidations.cpp",
+  "output": "CMakeFiles/test_recolector.dir/src/stringValidations.cpp.o"
+}
+]
