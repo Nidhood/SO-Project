@@ -6,12 +6,12 @@
 
 class PhSensor : public Sensor {
     double phData{};
+    std::ifstream infile;
 public:
-    PhSensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime) : Sensor(sensorType, fileName, pipeName, handlerTime) {};
+    PhSensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime);
     void generateData() override;
     void writeFifo() override;
     void sendData() override;
-
     [[noreturn]] void run() override;
 };
 

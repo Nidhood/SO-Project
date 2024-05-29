@@ -35,7 +35,6 @@ void Monitor::run(const std::string& file_temp, const std::string& file_ph, cons
 
 void Monitor::recolector(std::string pipe_nominal)
 {
-
   std::cout << "Entro a MONITOR" << std::endl;
   std::string path = "/tmp/"+pipe_nominal;
   int temperatureData = 0;
@@ -43,14 +42,15 @@ void Monitor::recolector(std::string pipe_nominal)
   const char* pipe = path.c_str();
   int fd, nbytes,  pid;
   uint8_t n[5];
+
    
   fd = open(pipe, O_RDONLY);
   if (fd == -1) {
       std::cerr << "Error al abrir el pipe: " << strerror(errno) << std::endl;
-      return;
+      exit(-1);
   }
 
-    std::cout << "Pipe abierto correctamente en modo solo lectura." << std::endl;
+  std::cout << "Pipe abierto correctamente en modo solo lectura." << std::endl;
   
   //Lectura Pipe 
    nbytes = read (fd, &n, sizeof(n));

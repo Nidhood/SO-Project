@@ -1,10 +1,9 @@
 /.idea
 /cmake-build-debug
 /.vscode
+__MACOSX
 monitor
 colada_temperatura.txt
 colada_ph.txt
-ph.txt
-temperatura.txt
 sensor
 test_sensor_receive_data

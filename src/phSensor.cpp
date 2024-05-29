@@ -1,32 +1,43 @@
 #include "phSensor.h"
 
+PhSensor::PhSensor(uint8_t sensorType, const std::string& fileName, const std::string& pipeName, int handlerTime)
+        : Sensor(sensorType, fileName, pipeName, handlerTime) {
+    infile.open(this->fileName );
+    if (!infile) {
+        std::cerr << "Error al abrir el archivo: '" << this->fileName << "'." << std::endl;
+        exit(1);
+    }
+}
+
 void PhSensor::generateData() {
+    // Verificar si se ha llegado al final del archivo
+    if (infile.eof()) {
+        // Volver al principio del archivo para leer desde el inicio
+        infile.clear();
+        infile.seekg(0, std::ios::beg);
+    }
 
-    // Creamos un generador de números aleatorios con la librería estándar de C++11:
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0, 14.0);
-    std::uniform_real_distribution<> prob(0.0, 1.0); // Distribución para probabilidad
-
-    // pH entre 0 y 14 (con un solo decimal):
-    this->phData = dis(gen);
-
-    // Determinar si se produce un error (20% de probabilidad)
-    if (prob(gen) <= 0.2) {
-        this->phData = -dis(gen); // pH negativo
+    // Leer el siguiente valor de pH del archivo
+    if (!(infile >> this->phData)) {
+        // Si se alcanzó el final del archivo, indicarlo y salir
+        if (infile.eof()) {
+            std::cerr << "Se ha llegado al final del archivo: '" << this->fileName << "'." << std::endl;
+            exit(1);
+        } else {
+            std::cerr << "Error al leer el archivo de pH: '" << this->fileName << "'." << std::endl;
+            exit(1);
+        }
     }
 
     // Si se muestran valores negativos, se marca como error:
     if (this->phData < 0) {
         std::cerr << "[Error]\t\tpH negativo:\t\t" << std::fixed << std::setprecision(1) << this->phData << std::endl;
     }
-
-    // Comprobar si el pH está fuera del rango permitido y alertar:
+        // Comprobar si el pH está fuera del rango permitido y alertar:
     else if (this->phData < 6.0 || this->phData > 8.0) {
         std::cerr << "[Alerta]\tpH fuera de rango:\t" << std::fixed << std::setprecision(1) << this->phData << std::endl;
     }
-
-    // Si se muestran valores positivos, se marca como correcto:
+        // Si se muestran valores positivos, se marca como correcto:
     else {
         std::cout << "[Correcto]\tpH dentro del rango:\t" << std::fixed << std::setprecision(1) << this->phData << std::endl;
     }
@@ -78,34 +89,20 @@ void PhSensor::sendData() {
 }
 
 [[noreturn]] void PhSensor::run() {
-
     // Crear el FIFO si no existe:
     createFifo();
 
     // Abrir el FIFO en modo escritura:
     openFifo();
 
-    // Abrir el archivo de configuración (sobreescribir):
-    std::ofstream file(this->fileName, std::ios::trunc);
+    // Generar y enviar datos de pH cada cierto intervalo:
+    while (true) {
 
-    // Comprobar si el archivo se abrió correctamente:
-    if (!file) {
-        std::cerr << "Error al abrir el archivo: '" << this->fileName << "'." << std::endl;
-        exit(1);
-    }
-
-    // Generar y enviar datos de ph cada cierto intervalo:
-    while(true) {
-
-        // Generar datos de ph:
+        // Generar datos de pH:
         generateData();
 
-        // Enviar datos de ph:
+        // Enviar datos de pH:
         sendData();
-
-        // Escribir el ph en el archivo de configuración:
-        file << this->phData << std::endl;
-        file.flush();
 
         // Esperar en el tiempo de manejo:
         sleep(this->handlerTime);

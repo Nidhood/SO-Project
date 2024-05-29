@@ -14,7 +14,6 @@ void Sensor::createFifo() {
         std::cerr << e.what() << std::endl;
         exit(1);
     }
-
 }
 
 // Método para abrir el FIFO:

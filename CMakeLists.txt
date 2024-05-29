@@ -18,10 +18,6 @@ add_executable(monitor
         src/monitor.cpp
 )
 
-# add_executable(test_sensor_receive_data
-#      app/main_process.cpp
-# )
-
 include_directories(include)    # Headers       (.h)
 include_directories(src)        # Source files  (.cpp)
 include_directories(app)        # Main files    (.cpp)

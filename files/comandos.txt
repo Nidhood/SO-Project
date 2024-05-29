@@ -1,5 +1,5 @@
 ./monitor -b 5 -t colada_temperatura.txt -h colada_ph.txt -p mipipo
 
-./sensor -s 2 -t 1 -f ph.txt -p mipipo
+./sensor -s 2 -t 5 -f ph_data.txt -p mipipo
 
-./sensor -s 1 -t 1 -f temperatura.txt p mipipo
+./sensor -s 1 -t 1 -f temperature_data.txt -p mipipo
